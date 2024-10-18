@@ -1,0 +1,35 @@
+{
+  "name": "pkg-template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "os": "^0.1.2",
+    "path": "^0.12.7",
+    "pkg": "^5.8.1",
+    "yargs": "^17.7.2"
+  },
+  "scripts": {
+    "dev": "node ./bin/cli.js",
+    "build": "pkg ."
+  },
+  "bin": {
+    "command": "./bin/cli.js"
+  },
+  "pkg": {
+    "scripts": "bin/**/*.js",
+    "targets": [
+      "node18-macos-arm64",
+      "node18-macos-x64",
+      "node18-windows-x64",
+      "node18-windows-arm64",
+      "node18-linux-x64",
+      "node18-linux-arm64"
+    ],
+    "options": [
+      "experimental-modules"
+    ],
+    "outputPath": "dist"
+  }
+}
