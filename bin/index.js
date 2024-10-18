@@ -1,8 +1,10 @@
 const fs = require('fs')
 const path = require('path')
 
-function mainFunction(filePath) {
+async function mainFunction(filePath, size) {
   // Do Function Here
+
+  console.log('a')
 }
 
 module.exports = mainFunction
