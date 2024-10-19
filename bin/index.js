@@ -1,10 +1,9 @@
 const fs = require('fs')
 const path = require('path')
+const canvasBased = require('./modules/canvas/createImage')
 
 async function mainFunction(filePath, size) {
-  // Do Function Here
-
-  console.log('a')
+  canvasBased(filePath, size)
 }
 
 module.exports = mainFunction
