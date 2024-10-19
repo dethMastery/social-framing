@@ -3,6 +3,8 @@ const fs = require('fs')
 
 const { redBan, logReset, greenSuccess } = require('../color')
 const FrameBased = require('./frame')
+const SpliterSanNi = require('./spliter/3x2')
+const SpliterIchiIchi = require('./spliter/1x1')
 
 async function canvasBased(filepath, size) {
   let frameBase
@@ -14,29 +16,18 @@ async function canvasBased(filepath, size) {
 
   frameBase = await FrameBased(filepath, size)
 
+  if (!fs.existsSync(outPath)) {
+    fs.mkdirSync(outPath)
+  }
+
   if (size == '3x2') {
-    // Do Cut
-    if (!fs.existsSync(outPath)) {
-      fs.mkdirSync(outPath)
-      fs.writeFileSync(`${outPath}/${fileName}`, frameBase)
-    } else {
-      fs.writeFileSync(`${outPath}/${fileName}`, frameBase)
-    }
+    await SpliterSanNi(frameBase, outPath, fileName)
 
-    console.log(
-      `${greenSuccess}Added watermarked to ${fileName} successfully!${logReset}`
-    )
+    console.log(`${greenSuccess}${fileName} cropped successfully!${logReset}`)
   } else if ((size = '1x1')) {
-    if (!fs.existsSync(outPath)) {
-      fs.mkdirSync(outPath)
-      fs.writeFileSync(`${outPath}/${fileName}`, frameBase)
-    } else {
-      fs.writeFileSync(`${outPath}/${fileName}`, frameBase)
-    }
+    SpliterIchiIchi(frameBase, outPath, fileName)
 
-    console.log(
-      `${greenSuccess}Added watermarked to ${fileName} successfully!${logReset}`
-    )
+    console.log(`${greenSuccess}${fileName} cropped successfully!${logReset}`)
   } else {
     console.log(`${redBan}Error: Invalid Size${logReset}`)
   }
